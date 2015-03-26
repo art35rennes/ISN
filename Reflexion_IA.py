@@ -1,5 +1,7 @@
 import random
-
+"""
+Bite in coming
+"""
 ListeTirIA = []
 DejaTirerAleat = 1
 coordIA = ""
