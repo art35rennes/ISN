@@ -17,6 +17,24 @@ Couler_memo = 0
 Invalide = 1
 Couler = 0
 
+def ResetIA():
+
+    global Couler, Toucher, Invalide, Couler_memo, Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+
+    XY = XY2[:]
+    Tuple_Oexclue = (-4,-3,-2,-1,1,2,3,4)
+    Oexclue = []
+    Oexclue = Tuple_Oexclue[:]
+    toucher = 0
+    Toucher = 0
+    Couler_memo = Couler_meme + 1
+    Invalide = 1
+    Couler = 0
+    DejaTirerAleat = 1
+    coordIA = ""
+    Boat_Target = 0
+    Direction_Boat = 0
+
 def Verif_Toucher():
     global Couler, Toucher, Invalide, Couler_memo, Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
@@ -101,6 +119,18 @@ def Verif_Tir():
                         Verif_Toucher()
                         if Toucher == 2:
                             Direction_Boat = 1
+        else:
+            if Couler = 0:
+                try:
+                    ListeTirIA.remove(coordIA)
+                    case = "deja"
+                    ListeTirIA.append(coordIA)
+                    print("try1")
+                except:
+                    print("except1")
+                    DejaTirerAleat = 0
+                Verif_Toucher()
+                Toucher = Toucher + 1
     
         
         
@@ -167,35 +197,17 @@ def IATIR():
                 if Direction == "X-1" or Direction == "X1":
                     while DejaTirerAleat == 1:
                         x = random.choice(Oexclue)
-                        print("je vais dans le in 1")
-                        if coordIA in ListeTirIA:
-                            print("je suis dans le in 1")
-                            DejaTirerAleat = 0
-                            TirX2 = x
-                            TirY2 = y
-                            coordIA = str(x) + " " + str(y)
-                        else:
-                            print("pass1")
+                       
                     
                     
-                    ListeTirIA.append(coordIA)
                 else:
                     while DejaTirerAleat == 1:
                         y = random.choice(Oexclue)
-                        print("je vais dans le in 2")
-                        if coordIA in ListeTirIA:
-                            print("je suis dans le in 2")
-                            DejaTirerAleat = 0
-                            TirX2 = x
-                            TirY2 = y
-                            coordIA = str(x) + " " + str(y)
-                        else:
-                            print("pass2")
-                            
-                    
-                    ListeTirIA.append(coordIA)
+                        
+
             else:
                 print("couler")
+                Reset()
 
 print(Boat_Liste)
 for i in range (0,15):
