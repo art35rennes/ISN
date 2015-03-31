@@ -219,45 +219,48 @@ def IATIR():
 Initialisation
 """
 
-YY = 0
-XX = 0
-
-for Xmoinsexclue in range(0,12):
-
-    XX = 0
-    YY = Xmoinsexclue
-    coordIAsetup = str(XX) + " " + str(YY)
-    ListeTirIA.append(coordIAsetup)
-    
-
-for Ymoinsexclue in range(0,12):
-
-    XX = Ymoinsexclue
-    YY = 0
-    coordIAsetup = str(XX) + " " + str(YY)
-    ListeTirIA.append(coordIAsetup)
-
-for Xplusexclue in range(0,12):
-
-    XX = 11
-    YY = Xplusexclue
-    coordIAsetup = str(XX) + " " + str(YY)
-    ListeTirIA.append(coordIAsetup)
-    
-
-for Yplusexclue in range(0,12):
-
-    XX = Yplusexclue
-    YY = 11
-    coordIAsetup = str(XX) + " " + str(YY)
-    ListeTirIA.append(coordIAsetup)
-
-print(ListeTirIA)
+def Initialisation():
+	
+	YY = 0
+	XX = 0
+	
+	for Xmoinsexclue in range(0,12):
+	
+	    XX = 0
+	    YY = Xmoinsexclue
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	    
+	
+	for Ymoinsexclue in range(0,12):
+	
+	    XX = Ymoinsexclue
+	    YY = 0
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	
+	for Xplusexclue in range(0,12):
+	
+	    XX = 11
+	    YY = Xplusexclue
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	    
+	
+	for Yplusexclue in range(0,12):
+	
+	    XX = Yplusexclue
+	    YY = 11
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	
+	print(ListeTirIA)
 
 """
 Test
 """
 
+Initialisation()
 print(Boat_Liste)
 for i in range (0,15):
     IATIR()
