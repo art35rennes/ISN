@@ -16,10 +16,48 @@ Toucher = 0
 Couler_memo = 0
 Invalide = 1
 Couler = 0
+DejaTirer = 1
+
+def Initialisation():
+	
+	YY = 0
+	XX = 0
+	
+	for Xmoinsexclue in range(0,12):
+	
+	    XX = 0
+	    YY = Xmoinsexclue
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	    
+	
+	for Ymoinsexclue in range(0,12):
+	
+	    XX = Ymoinsexclue
+	    YY = 0
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	
+	for Xplusexclue in range(0,12):
+	
+	    XX = 11
+	    YY = Xplusexclue
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	    
+	
+	for Yplusexclue in range(0,12):
+	
+	    XX = Yplusexclue
+	    YY = 11
+	    coordIAsetup = str(XX) + " " + str(YY)
+	    ListeTirIA.append(coordIAsetup)
+	
+	print(ListeTirIA)
 
 def ResetIA():
 
-    global Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
+    global DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
     global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     XY = XY2[:]
@@ -35,10 +73,11 @@ def ResetIA():
     coordIA = ""
     Boat_Target = 0
     Direction_Boat = 0
+    DejaTirer = 1
 
 def Verif_Toucher():
 
-    global Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
+    global DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
     global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     try:
@@ -51,7 +90,7 @@ def Verif_Toucher():
         
 def Verif_Tir():
 
-    global Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
+    global DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
     global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
     
     if Boat_Target == 0: #en cas de tiraleat
@@ -132,16 +171,15 @@ def Verif_Tir():
                     print("try1")
                 except:
                     print("except1")
-                    DejaTirerAleat = 0
+                    DejaTirer = 0
                 Verif_Toucher()
                 Toucher = Toucher + 1
-    
-        
+           
         
 
 def TirAleat():
 
-    global Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
+    global DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
     global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     while DejaTirerAleat == 1:
@@ -155,7 +193,7 @@ def TirAleat():
         
 def IATIR():
 
-    global Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
+    global DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
     global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     if Boat_Target == 0:
@@ -199,69 +237,36 @@ def IATIR():
                         Verif_Tir()
                         ########################################
         else:
+
+            TirX2 = x
+            TirY2 = y
+            
             if Couler == 0:
                 if Direction == "X-1" or Direction == "X1":
-                    while DejaTirerAleat == 1:
+                    while DejaTirer == 1:
                         x = random.choice(Oexclue)
-                       
-                    
+                        y = TirY2
+                
                     
                 else:
-                    while DejaTirerAleat == 1:
+                    while DejaTirer == 1:
                         y = random.choice(Oexclue)
+                        x = TirX2
                         
 
             else:
                 print("couler")
                 Reset()
 
-"""
-Initialisation
-"""
-
-def Initialisation():
-	
-	YY = 0
-	XX = 0
-	
-	for Xmoinsexclue in range(0,12):
-	
-	    XX = 0
-	    YY = Xmoinsexclue
-	    coordIAsetup = str(XX) + " " + str(YY)
-	    ListeTirIA.append(coordIAsetup)
-	    
-	
-	for Ymoinsexclue in range(0,12):
-	
-	    XX = Ymoinsexclue
-	    YY = 0
-	    coordIAsetup = str(XX) + " " + str(YY)
-	    ListeTirIA.append(coordIAsetup)
-	
-	for Xplusexclue in range(0,12):
-	
-	    XX = 11
-	    YY = Xplusexclue
-	    coordIAsetup = str(XX) + " " + str(YY)
-	    ListeTirIA.append(coordIAsetup)
-	    
-	
-	for Yplusexclue in range(0,12):
-	
-	    XX = Yplusexclue
-	    YY = 11
-	    coordIAsetup = str(XX) + " " + str(YY)
-	    ListeTirIA.append(coordIAsetup)
-	
-	print(ListeTirIA)
 
 """
 Test
 """
 
 Initialisation()
+
 print(Boat_Liste)
+
 for i in range (0,15):
     IATIR()
     print(coordIA)
