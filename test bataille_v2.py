@@ -5,7 +5,7 @@ from socket import gethostbyname_ex, gethostname
 
 
 
-global role
+global role, iphost
 
 """
 """
@@ -26,10 +26,12 @@ def Valider(): #appeler par la fonction IP_host
 
 """
 """
+
+
 def IP_host(): #appeler par le bouton heberger
     
-    
-    global HOST
+"""    
+    global HOST, iphost
     global fenetre_hebergeur
     
     HOST = StringVar()
@@ -61,6 +63,11 @@ def IP_host(): #appeler par le bouton heberger
 
         fenetre_hebergeur.mainloop
 
+        HOST = iphost
+        print(HOST)
+"""
+    Valider()
+
 """
 """
 
@@ -83,7 +90,7 @@ def Rejoindre(): #appeler par le bouton rejoindre
     ip_label = Label(fenetre_connection, text="IP :", font="arial 10 bold")
     ip_entry = Entry(fenetre_connection, width=14, text = ip_serveur)
     port_label = Label(fenetre_connection, text="Port :", font="arial 10 bold")
-    port_entry = Entry(fenetre_connection, width=5, text = port_serveur)
+    port_entry = Entry(fenetre_connection, width=5, text = port_serveur)   
     test_button = Button(fenetre_connection, text="Connection", font="arial 10 bold", command=connection)
 
     # placement des widgets d'entrée dans fenetre
@@ -93,7 +100,9 @@ def Rejoindre(): #appeler par le bouton rejoindre
     port_entry.pack(side=LEFT,padx=8,pady=8)
     test_button.pack(side=LEFT,padx=8,pady=8)
 
-    fenetre_connection.mainloop
+    fenetre_connection.mainloop()
+    port_serveur.set(50000)
+    ip_serveur.set("192.168.")
 
 """
 """
@@ -128,14 +137,23 @@ def Serveur(): #appeler par valider
         
     role = 1    # role -> serveur(1) ou client(2) pour gerer le tour par tour
 
+    fenetre_attente = Tk()
+    fenetre_attente.title("Attente de joueur")
+
+    message = Label(fenetere_attente, text = "En attente de connexion d'un adversaire")
+
+    message.pack(side=TOP)
+
+    fenetre_attente.mainloop()
+"""
     try:    
         print("Tentative de création d'un socket à l'adresse "+ str(HOST.get()) +" sur le port 50000...")
     except:
         print("Tentative de création d'un socket à l'adresse "+ str(HOST) +" sur le port 50000...")
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
+"""
     try :
-        mySocket.bind((str(HOST), int(50000)))
+        mySocket.bind((str(iphost), int(50000)))
         print("En attente d'un joueur...")
                 
     except socket.error:
@@ -149,19 +167,22 @@ def Serveur(): #appeler par valider
 """
 Fin definition des fonctions
 """
-
+iphost = str(gethostbyname_ex(gethostname())[2])
+iphost = str(iphost.split("'")[1])
+#print(str(iphost.split("'")[1]))
+print(iphost)
 
 #Debut du programme
 
 fenetre_choix = Tk()
-fenetre_choix.title("Bataille Navale Connection  IP: " + str(gethostbyname_ex(gethostname())[2]))
+fenetre_choix.title("Bataille Navale Connection  IP: " + iphost)
 
 button_heber = Button(fenetre_choix, text = "Heberger une partie",font="arial 12 bold",command=IP_host )
 button_rej = Button(fenetre_choix, text = "Rejoindre une partie",font="arial 12 bold", command=Rejoindre)
 button_ia = Button(fenetre_choix, text = "Jouer contre l'IA",font="arial 12 bold")
 taille_x_l = Label(fenetre_choix)
 taille_y_b = Label(fenetre_choix)
-info_ip = Label(fenetre_choix, text = "Votre IP: " +str(gethostbyname_ex(gethostname())[2]))
+info_ip = Label(fenetre_choix, text = "Votre IP: " + iphost)
 
 taille_x_l.pack(side=TOP,padx=380,pady=20)
 button_heber.pack(side=TOP,padx=50,pady=10)
