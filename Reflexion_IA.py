@@ -244,7 +244,7 @@ def IATIR():
             if Couler == 0:
                 if Direction == "X-1" or Direction == "X1":
                     while DejaTirer == 1:
-                        x = random.choice(Oexclue)
+                        x = TirX2 + random.choice(Oexclue)
                         y = TirY2
                 
                     
