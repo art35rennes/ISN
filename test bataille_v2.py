@@ -29,43 +29,48 @@ def Valider(): #appeler par la fonction IP_host
 
 
 def IP_host(): #appeler par le bouton heberger
+	
     
-"""    
     global HOST, iphost
     global fenetre_hebergeur
-    
-    HOST = StringVar()
-    fenetre_choix.destroy()
-    
-    # L'ip du serveur pour le socket est directement recuperer sur l'ordinateur
-    
-    try:
-        
-        HOST = [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][0]
-        Valider()
-    
-    except:
-        
-        fenetre_hebergeur = Tk()
-        fenetre_hebergeur.title("Bataille Navale IP")
-         
-        HOST = StringVar()
-    
-        # création des widgets d'entrée
-        ip_label = Label(fenetre_hebergeur, text="Entrer votre IP :", font="arial 10 bold")
-        ip_entry = Entry(fenetre_hebergeur, width=14, text = HOST)
-        test_button = Button(fenetre_hebergeur, text="Valider", font="arial 10 bold", command=Valider)
+	try:
+		a=a
+	    
+	    
+	    HOST = StringVar()
+	    fenetre_choix.destroy()
+	    
+	    # L'ip du serveur pour le socket est directement recuperer sur l'ordinateur
+	    
+	    try:
+	        
+	        HOST = [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][0]
+	        Valider()
+	    
+	    except:
+	        
+	        fenetre_hebergeur = Tk()
+	        fenetre_hebergeur.title("Bataille Navale IP")
+	         
+	        HOST = StringVar()
+	    
+	        # création des widgets d'entrée
+	        ip_label = Label(fenetre_hebergeur, text="Entrer votre IP :", font="arial 10 bold")
+	        ip_entry = Entry(fenetre_hebergeur, width=14, text = HOST)
+	        test_button = Button(fenetre_hebergeur, text="Valider", font="arial 10 bold", command=Valider)
+	
+	        # placement des widgets d'entrée dans fenetre
+	        ip_label.pack(side=LEFT,padx=8,pady=8)
+	        ip_entry.pack(side=LEFT,padx=8,pady=8)
+	        test_button.pack(side=LEFT,padx=30,pady=8)
+	
+	        fenetre_hebergeur.mainloop
+	
+	        HOST = iphost
+	        print(HOST)
+	except:
+		pass
 
-        # placement des widgets d'entrée dans fenetre
-        ip_label.pack(side=LEFT,padx=8,pady=8)
-        ip_entry.pack(side=LEFT,padx=8,pady=8)
-        test_button.pack(side=LEFT,padx=30,pady=8)
-
-        fenetre_hebergeur.mainloop
-
-        HOST = iphost
-        print(HOST)
-"""
     Valider()
 
 """
@@ -101,7 +106,7 @@ def Rejoindre(): #appeler par le bouton rejoindre
     test_button.pack(side=LEFT,padx=8,pady=8)
 
     fenetre_connection.mainloop()
-    port_serveur.set(50000)
+    port_serveur = 50000
     ip_serveur.set("192.168.")
 
 """
