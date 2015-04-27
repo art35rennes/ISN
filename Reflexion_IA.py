@@ -22,6 +22,10 @@ Couler = 0
 DejaTirer = 1
 tx = 0
 ty = 0
+txp = 0
+typ = 0
+txpp = 0
+typp = 0
 boats = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
 
 def Initialisation():
@@ -64,12 +68,14 @@ def Initialisation():
 def ResetIA():
 
     global boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
-    global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+    global txp, typ, typp, txpp, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     XY = XY2[:]
     Tuple_Oexclue = (-4,-3,-2,-1,1,2,3,4)
     Oexclue = []
-    Oexclue = Tuple_Oexclue[:]
+    for jkl in range (0,8):
+        print(Oexclue)
+        Oexclue.append(int(Tuple_Oexclue[jkl]))
     toucher = 0
     Toucher = 0
     Couler_memo = Couler_meme + 1
@@ -84,19 +90,30 @@ def ResetIA():
 def Verif_Toucher():
 
     global boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
-    global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+    global txp, typ, typp, txpp, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+    
 
-    if [key for key in boats if coordIA in boats[key]] == []:
-        print("Bateau toucher"+ " " + coordIA)
+    if [key for key in boats if coordIA in boats[key]] != []:
+
+        print("**Bateau toucher"+ " " + coordIA)
         Toucher = Toucher + 1
         toucher = 1
+        bateautouché = [key for key in boats if coordIA in boats[key]]
+
+        if boats[bateautouché[0]] == []:
+            print("bateau coulé")
+            printbateautouché
+            boats.pop(bateautouché[0])
+            Couler = 1
     else:
         toucher = 0
+
             
 def Verif_Tir():
 
     global boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
-    global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+    global txp, typ, typp, txpp, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+    
     
     if Boat_Target == 0: #en cas de tiraleat
         try:
@@ -185,7 +202,7 @@ def Verif_Tir():
 def TirAleat():
 
     global boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
-    global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+    global txp, typ, typp, txpp, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     while DejaTirerAleat == 1:
         x = random.randint(1,10)
@@ -199,7 +216,7 @@ def TirAleat():
 def IATIR():
 
     global boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
-    global toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
+    global txp, typ, typp, txpp, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     if Boat_Target == 0:
         print("Tir random")
@@ -250,28 +267,40 @@ def IATIR():
                 if Direction == "X-1" or Direction == "X1":
                     while DejaTirer == 1:
                         tx = random.choice(Oexclue)
-                        int(tx)
+                        txp = Oexclue.index(tx)
+                        print("txp = "+str(txp))
+                        print(type(txp))
                         print("tx = " + str(tx))
+                        print(Oexclue)
+                        int(tx)
+                        y = TirY2 
                         x = TirX2 + tx
-                        y = TirY2
+                        print("x y = ",x,y)
+                        coordIA = str(x) + " " + str(y)
                         Verif_Tir()
-                    Oexclue.remove(tx)
+                    txpp = Oexclue.pop(txp)
                 
                     
                 else:
                     while DejaTirer == 1:
                         ty = random.choice(Oexclue)
+                        typ = Oexclue.index(ty)
+                        print("typ = "+str(typ))
+                        print(type(typ))
                         print("ty = " + str(ty))
+                        print(Oexclue)
                         int(ty)
                         y = TirY2 + ty
                         x = TirX2
+                        print("x y = ",x,y)
+                        coordIA = str(x) + " " + str(y)
                         Verif_Tir()
-                    Oexclue.remove(ty)
+                    typp = Oexclue.pop(typ)
 
             else:
                 print("couler")
                 Reset()
-        print("fini")
+                print("fini")
 
 
 """

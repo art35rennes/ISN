@@ -30,7 +30,7 @@ def Valider(): #appeler par la fonction IP_host
 
 def IP_host(): #appeler par le bouton heberger
     
-"""    
+    """    
     global HOST, iphost
     global fenetre_hebergeur
     
@@ -65,7 +65,7 @@ def IP_host(): #appeler par le bouton heberger
 
         HOST = iphost
         print(HOST)
-"""
+    """
     Valider()
 
 """
@@ -145,13 +145,13 @@ def Serveur(): #appeler par valider
     message.pack(side=TOP)
 
     fenetre_attente.mainloop()
-"""
+    """
     try:    
         print("Tentative de création d'un socket à l'adresse "+ str(HOST.get()) +" sur le port 50000...")
     except:
         print("Tentative de création d'un socket à l'adresse "+ str(HOST) +" sur le port 50000...")
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-"""
+    """
     try :
         mySocket.bind((str(iphost), int(50000)))
         print("En attente d'un joueur...")
