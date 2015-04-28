@@ -10,7 +10,7 @@ XY = ["X1","Y1","X-1","Y-1"]
 Tuple_Oexclue = (-4,-3,-2,-1,1,2,3,4)
 Oexclue = []
 for jkl in range (0,8):
-    print(Oexclue)
+    #print(Oexclue)
     Oexclue.append(int(Tuple_Oexclue[jkl]))
 print(Oexclue)
 Boat_Liste = ["1 1","1 2","1 3","1 4","5 5","4 5","3 5","8 8","8 9","10 9","10 10","4 3","4 4","2 9","3 9"]
@@ -89,23 +89,25 @@ def ResetIA():
 
 def Verif_Toucher():
 
-    global boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
+    global bateautouché, boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
     global txp, typ, typp, txpp, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
     
 
     if [key for key in boats if coordIA in boats[key]] != []:
 
-        print("**Bateau toucher"+ " " + coordIA)
+        print("                                                             **Bateau toucher"+ " " + coordIA)
         Toucher = Toucher + 1
         toucher = 1
         bateautouché = [key for key in boats if coordIA in boats[key]]
+        print("                       ^^ "+str(bateautouché))
 
         if boats[bateautouché[0]] == []:
-            print("bateau coulé")
-            printbateautouché
+            print("                                         bateau coulé")
+            print("                       // "+str(bateautouché))
             boats.pop(bateautouché[0])
             Couler = 1
     else:
+        print("                                         dans l'eau")
         toucher = 0
 
             
@@ -120,9 +122,9 @@ def Verif_Tir():
             ListeTirIA.remove(coordIA)
             case = "deja"
             ListeTirIA.append(coordIA)
-            print("try1")
+            #print("try1")
         except:
-            print("except1")
+            #print("except1")
             DejaTirerAleat = 0
         Verif_Toucher()
         if toucher == 1:
@@ -137,9 +139,10 @@ def Verif_Tir():
                     ListeTirIA.remove(coordIA)
                     case = "deja"
                     ListeTirIA.append(coordIA)
-                    print("try2")
+                    #print("try2")
                 except:
-                    print("except2")
+                    #print("except2")
+                    pass
                 Verif_Toucher()
                 if Toucher == 2:
                     Direction_Boat = 1
@@ -151,9 +154,10 @@ def Verif_Tir():
                         ListeTirIA.remove(coordIA)
                         case = "deja"
                         ListeTirIA.append(coordIA)
-                        print("try3")
+                        #print("try3")
                     except:
-                        print("except3")
+                        #print("except3")
+                        pass
                     Verif_Toucher()
                     if Toucher == 2:
                         Direction_Boat = 1
@@ -165,9 +169,10 @@ def Verif_Tir():
                             ListeTirIA.remove(coordIA)
                             case = "deja"
                             ListeTirIA.append(coordIA)
-                            print("try4")
+                            #print("try4")
                         except:
-                            print("except4")
+                            #print("except4")
+                            pass
                         Verif_Toucher()
                         if Toucher == 2:
                             Direction_Boat = 1
@@ -178,9 +183,10 @@ def Verif_Tir():
                             ListeTirIA.remove(coordIA)
                             case = "deja"
                             ListeTirIA.append(coordIA)
-                            print("try5")
+                            #print("try5")
                         except:
-                            print("except5")
+                            #print("except5")
+                            pass
                         Verif_Toucher()
                         if Toucher == 2:
                             Direction_Boat = 1
@@ -190,9 +196,9 @@ def Verif_Tir():
                     ListeTirIA.remove(coordIA)
                     case = "deja"
                     ListeTirIA.append(coordIA)
-                    print("try1")
+                    #print("try1")
                 except:
-                    print("except1")
+                    #print("except1")
                     DejaTirer = 0
                 Verif_Toucher()
                 Toucher = Toucher + 1
@@ -310,9 +316,13 @@ Test
 Initialisation()
 
 print(boats)
+print(" ")
 
 for i in range (0,15):
     IATIR()
     print(coordIA)
+
+print(" ")
 print(ListeTirIA)
-print(Boats)
+print(" ")
+print(boats)
