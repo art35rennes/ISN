@@ -275,7 +275,7 @@ def IATIR():
                         tx = random.choice(Oexclue)
                         txp = Oexclue.index(tx)
                         print("txp = "+str(txp))
-                        print(type(txp))
+                        #print(type(txp))
                         print("tx = " + str(tx))
                         print(Oexclue)
                         int(tx)
@@ -285,6 +285,7 @@ def IATIR():
                         coordIA = str(x) + " " + str(y)
                         Verif_Tir()
                     txpp = Oexclue.pop(txp)
+                    Oexclue.remove(tx)
                 
                     
                 else:
@@ -292,7 +293,7 @@ def IATIR():
                         ty = random.choice(Oexclue)
                         typ = Oexclue.index(ty)
                         print("typ = "+str(typ))
-                        print(type(typ))
+                        #print(type(typ))
                         print("ty = " + str(ty))
                         print(Oexclue)
                         int(ty)
@@ -302,6 +303,7 @@ def IATIR():
                         coordIA = str(x) + " " + str(y)
                         Verif_Tir()
                     typp = Oexclue.pop(typ)
+                    Oexclue.remove(ty)
 
             else:
                 print("couler")
