@@ -95,7 +95,7 @@ def Verif_Toucher():
 
     if [key for key in boats if coordIA in boats[key]] != []:
 
-        print("                                                             **Bateau toucher"+ " " + coordIA)
+        print("                                         **Bateau toucher"+ " " + coordIA)
         Toucher = Toucher + 1
         toucher = 1
         bateautouché = [key for key in boats if coordIA in boats[key]]
@@ -302,8 +302,8 @@ def IATIR():
                         print("x y = ",x,y)
                         coordIA = str(x) + " " + str(y)
                         Verif_Tir()
-                    typp = Oexclue.pop(typ)
-                    Oexclue.remove(ty)
+                    typp = listetest.pop(typ)
+                    listetest.remove(ty)
 
             else:
                 print("couler")
@@ -318,6 +318,14 @@ Test
 Initialisation()
 
 print(boats)
+print(" ")
+a=-4
+listetest = []
+for i in range (0,9):
+    listetest.append(a)
+    a=a+1
+print("listetest = "+ str(listetest))
+
 print(" ")
 
 for i in range (0,15):
