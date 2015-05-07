@@ -86,6 +86,11 @@ def Rejoindre(): #appeler par le bouton rejoindre
     ip_serveur = StringVar()
     port_serveur = IntVar()
 
+    port_serveur.set(50000)
+    ip_serveur.set("192.168.")
+    print(port_serveur)
+    print(ip_serveur)
+
     # création des widgets d'entrée
     ip_label = Label(fenetre_connection, text="IP :", font="arial 10 bold")
     ip_entry = Entry(fenetre_connection, width=14, text = ip_serveur)
@@ -101,8 +106,7 @@ def Rejoindre(): #appeler par le bouton rejoindre
     test_button.pack(side=LEFT,padx=8,pady=8)
 
     fenetre_connection.mainloop()
-    port_serveur.set(50000)
-    ip_serveur.set("192.168.")
+    
 
 """
 """
