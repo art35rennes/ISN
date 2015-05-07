@@ -11,7 +11,7 @@ global role, iphost
 """
 def Valider(): #appeler par la fonction IP_host
     global fenetre_hebergeur
-
+    """
     try:
         print(HOST.get())
     except:
@@ -21,7 +21,7 @@ def Valider(): #appeler par la fonction IP_host
         fenetre_hebergeur.destroy()
     except:
         pass
-
+    """
     Serveur()
 
 """
@@ -30,10 +30,10 @@ def Valider(): #appeler par la fonction IP_host
 
 def IP_host(): #appeler par le bouton heberger
     
-    """    
+      
     global HOST, iphost
     global fenetre_hebergeur
-    
+    """
     HOST = StringVar()
     fenetre_choix.destroy()
     
@@ -109,6 +109,7 @@ def Rejoindre(): #appeler par le bouton rejoindre
 
 def connection(): #appeler par la fonction rejoindre quand on clic sur connection
 
+    global ip_serveur
     
     print("Tentative de création d'un socket à l'adresse "+str(ip_serveur.get())+" sur le port "+str(port_serveur.get())+"...")
     
@@ -118,7 +119,7 @@ def connection(): #appeler par la fonction rejoindre quand on clic sur connectio
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     try :  
 
-        mySocket.connect((ip_server.get(), int(port_serveur.get())))
+        mySocket.connect((ip_serveur.get(), int(port_serveur.get())))
         print("Socket créé. Connexion au serveur...")
         
     except socket.error:
@@ -140,7 +141,7 @@ def Serveur(): #appeler par valider
     fenetre_attente = Tk()
     fenetre_attente.title("Attente de joueur")
 
-    message = Label(fenetere_attente, text = "En attente de connexion d'un adversaire")
+    message = Label(fenetre_attente, text = "En attente de connexion d'un adversaire")
 
     message.pack(side=TOP)
 
