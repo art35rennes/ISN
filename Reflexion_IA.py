@@ -196,12 +196,29 @@ def Verif_Tir():
                     ListeTirIA.remove(coordIA)
                     case = "deja"
                     ListeTirIA.append(coordIA)
-                    #print("try1")
+                    print("la")
+                    try:
+                        typp = Oexclue.pop(typ)
+                    except:
+                        txpp = Oexclue.pop(txp)
+                    
                 except:
-                    #print("except1")
+                    print("la2")
                     DejaTirer = 0
                 Verif_Toucher()
                 Toucher = Toucher + 1
+            else:
+                try:
+                    ListeTirIA.remove(coordIA)
+                    case = "deja"
+                    ListeTirIA.append(coordIA)
+                    print("ici")
+                except:
+                    print("ici2")
+                    DejaTirer = 0
+                Verif_Toucher()
+                Toucher = Toucher + 1
+                
            
         
 
@@ -221,7 +238,7 @@ def TirAleat():
         
 def IATIR():
 
-    global composition, BoatsIA, boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo,Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
+    global composition, BoatsIA, boats, tx, ty, DejaTirer, Couler, Toucher, Invalide, Couler_memo, Direction, Tuple_XY, x, y, TirX1, TirY1, TirX2, TirY2
     global txp, typ, typp, txpp, toucher, Boat_Liste, Oexclue, XY, Direction_Boat, Boat_Target, coordIA, DejaTirerAleat, ListeTirIA, Tuple_Oexclue
 
     if Boat_Target == 0:
@@ -279,31 +296,36 @@ def IATIR():
                         print("tx = " + str(tx))
                         print(Oexclue)
                         int(tx)
-                        y = TirY2 
-                        x = TirX2 + tx
+                        y = TirY1 
+                        x = TirX1 + tx
                         print("x y = ",x,y)
                         coordIA = str(x) + " " + str(y)
                         Verif_Tir()
                     txpp = Oexclue.pop(txp)
-                    Oexclue.remove(tx)
+                    print("::  " + str(Oexclue))
+                    DejaTirer = 1
+                    
                 
                     
                 else:
                     while DejaTirer == 1:
+                        print(Oexclue)
                         ty = random.choice(Oexclue)
                         typ = Oexclue.index(ty)
                         print("typ = "+str(typ))
                         #print(type(typ))
                         print("ty = " + str(ty))
-                        print(Oexclue)
+                        
                         int(ty)
-                        y = TirY2 + ty
-                        x = TirX2
+                        y = TirY1 + ty
+                        x = TirX1
                         print("x y = ",x,y)
                         coordIA = str(x) + " " + str(y)
                         Verif_Tir()
-                    typp = listetest.pop(typ)
-                    listetest.remove(ty)
+                    
+                    print("::  " + str(Oexclue))
+                    DejaTirer = 1
+                    
 
             else:
                 print("couler")
@@ -365,7 +387,7 @@ print("listetest = "+ str(listetest))
 
 print(" ")
 
-for i in range (0,15):
+for i in range (0,50):
     IATIR()
     print(coordIA)
 

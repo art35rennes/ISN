@@ -114,6 +114,9 @@ def Rejoindre(): #appeler par le bouton rejoindre
 def connection(): #appeler par la fonction rejoindre quand on clic sur connection
 
     global ip_serveur
+
+    print(port_serveur)
+    print(ip_serveur)
     
     print("Tentative de création d'un socket à l'adresse "+str(ip_serveur.get())+" sur le port "+str(port_serveur.get())+"...")
     
