@@ -11,86 +11,19 @@ Boat_found = "non"
 Boat_direction = "non"
 Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
 Toucher = 0
-
-
-
-def Reset():
-
-    global Boat_found, Boat_direction, touche
+nbtir = 0
 
 
 def Tir_aleat():
 
-    global Grille, Coord_Tir
+    global Grille, Coord_Tir, nbtir
 
     Coord_Tir = random.choice(Grille)
     print("Tir aleat " + str(Coord_Tir))
     Grille.remove(Coord_Tir)
-    
+    Verif_joueur_toucher()
+    nbtir = nbtir + 1
 
-
-
-def Tir_IA():
-
-    global Grille, Boat_found, Boat_direction, Coord_Tir
-
-    Liste_Direction = ["X1", "X-1", "Y1", "Y-1"]
-
-    if Boat_found == "non":
-
-        Tir_aleat()
-        Verif_joueur_toucher()
-
-    elif Boat_direction == "non":
-
-        Direction = random.choice(Liste_Direction)
-        print("Direction " + Direction)
-        Liste_Direction.remove(Direction)
-
-        if Direction == "X1":
-
-            x = Coord_Tir_1.split(" ")[0]
-            print(x)
-            print("")
-            x = x + 1
-            print(x)
-            Coord_Tir = str(x) + " " + str(y)
-
-        elif Direction == "X-1":
-
-            x = Coord_Tir_1.split(" ")[0]
-            print(x)
-            print("")
-            int(x)
-            x = x - 1
-            print(x)
-            Coord_Tir = str(x) + " " + str(y)
-
-        elif Direction == "Y1":
-
-            y = Coord_Tir_1.split(" ")[1]
-            print(y)
-            print("")
-            int(y)
-            y = y + 1
-            print(y)
-            Coord_Tir = str(x) + " " + str(y)
-
-        elif Direction == "Y-1":
-
-            y = Coord_Tir_1.split(" ")[1]
-            print(y)
-            print("")
-            int(y)
-            y = y - 1
-            print(y)
-            Coord_Tir = str(x) + " " + str(y)
-
-    elif Couler == "non":
-
-        if Direction == "X1" or Direction == "X-1":
-            pass
-        
 
 
 def Verif_joueur_toucher():
@@ -115,16 +48,6 @@ def Verif_joueur_toucher():
     else:
         print("                                         dans l'eau")
         toucher = "non"
-
-
-
-
-def Verif_deja_tirer():
-
-    global Coord_Tir, Grille
-
-
-
 
 
 
@@ -163,13 +86,21 @@ def Placement_bateau():
     print(BoatsIA)
     print(" ")
 
+
+
 """.....................................................
     TEST 
 """
 
+
 Placement_bateau()
 
-for boucletest in range (0,15):
-    Tir_IA()
+for boucletest in range (0,100):
+    Tir_aleat()
+
+    if Toucher == 17:
+        print("Tout les bateaux ennemies on été coulé")
+        break
 
 print(Grille)
+print(nbtir) 
