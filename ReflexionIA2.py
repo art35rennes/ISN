@@ -7,8 +7,8 @@ for x in range (1,11):
         #print(CoordTirIA)
         Grille.append(CoordGrille)
 print(Grille)
-Boat_found = "non"
-Boat_direction = "non"
+Boat_found = 0
+Boat_direction = 0
 Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
 Toucher = 0
 
@@ -21,27 +21,28 @@ def Reset():
 
 def Tir_aleat():
 
-    global Grille, Coord_Tir
+    global Grille, Coord_Tir, Premiere_touche
 
     Coord_Tir = random.choice(Grille)
     print("Tir aleat " + str(Coord_Tir))
     Grille.remove(Coord_Tir)
+    Premiere_touche = Coord_Tir
     
 
 
 
 def Tir_IA():
 
-    global Grille, Boat_found, Boat_direction, Coord_Tir
+    global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche
 
     Liste_Direction = ["X1", "X-1", "Y1", "Y-1"]
 
-    if Boat_found == "non":
+    if Boat_found == 0:
 
         Tir_aleat()
         Verif_joueur_toucher()
 
-    elif Boat_direction == "non":
+    elif Boat_direction == 0:
 
         Direction = random.choice(Liste_Direction)
         print("Direction " + Direction)
@@ -86,42 +87,52 @@ def Tir_IA():
             print(y)
             Coord_Tir = str(x) + " " + str(y)
 
-    elif Couler == "non":
+    elif Couler == 1:
 
         if Direction == "X1" or Direction == "X-1":
-            pass
+            print("ici")
         
 
 
 def Verif_joueur_toucher():
 
-    global Grille, Boat_found, Boat_direction, Boats_joueur, Coord_Tir, Toucher, toucher, bateautouche
+    global Grille, Boat_found, Boat_direction, Boats_joueur, Coord_Tir, Toucher, toucher, bateautouche, Premiere_touche
     
     if [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]] != []:
 
         print("                                         **Bateau toucher"+ " " + Coord_Tir)
 
         Toucher = Toucher + 1
-        toucher = "non"
+        toucher = 1
+        
+        if Boat_found == 1:
+            Boat_direction = 1
+
+        Boat_found == 1
+            
         bateautouche = [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]]
 
         print("                       ^^ "+str(bateautouche))
+
+        print("on est la")
 
         if Boats_joueur[bateautouche[0]] == []:
             print("                                         bateau coulé")
             print("                       // "+str(bateautouche))
             boats.pop(bateautouche[0])
-            Couler = "oui"
+            Couler = 1
+            print("on est la2")
     else:
         print("                                         dans l'eau")
         toucher = "non"
+        print("on est la3")
 
 
 
 
 def Verif_deja_tirer():
 
-    global Coord_Tir, Grille
+    global Coord_Tir, Grille, Premiere_touche
 
 
 
@@ -172,4 +183,4 @@ Placement_bateau()
 for boucletest in range (0,15):
     Tir_IA()
 
-print(Grille)
+#print(Grille)
