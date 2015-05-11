@@ -32,7 +32,7 @@ def IP_host(): #appeler par le bouton heberger
     
       
     global HOST, iphost
-    global fenetre_hebergeur
+    global fenetre_hebergeur, iphost
     """
     HOST = StringVar()
     fenetre_choix.destroy()
@@ -81,15 +81,15 @@ def Rejoindre(): #appeler par le bouton rejoindre
     fenetre_connection.title("Bataille Navale Connection")
     
     global ip_serveur
-    global port_serveur
+    global port_serveur, fenetre_connection
     
     ip_serveur = StringVar()
     port_serveur = IntVar()
 
     port_serveur.set(50000)
     ip_serveur.set("192.168.")
-    print(port_serveur)
-    print(ip_serveur)
+    print(port_serveur.get())
+    print(ip_serveur.get())
 
     # création des widgets d'entrée
     ip_label = Label(fenetre_connection, text="IP :", font="arial 10 bold")
@@ -113,10 +113,10 @@ def Rejoindre(): #appeler par le bouton rejoindre
 
 def connection(): #appeler par la fonction rejoindre quand on clic sur connection
 
-    global ip_serveur
+    global ip_serveur, port_serveur, iphost, fenetre_connection
 
-    print(port_serveur)
-    print(ip_serveur)
+    print(port_serveur.get())
+    print(ip_serveur.get())
     
     print("Tentative de création d'un socket à l'adresse "+str(ip_serveur.get())+" sur le port "+str(port_serveur.get())+"...")
     
@@ -133,7 +133,7 @@ def connection(): #appeler par la fonction rejoindre quand on clic sur connectio
         print("Echec de la connection. Réessayez...")
         sys.exit()
 
-    print("Vous etes connecte au serveur"+ str(HOST))
+    print("Vous etes connecte au serveur"+ str(iphost))
     fenetre_connection.destroy()
 
 """
@@ -141,10 +141,10 @@ def connection(): #appeler par la fonction rejoindre quand on clic sur connectio
 
 def Serveur(): #appeler par valider
 
-    global HOST
+    global HOST, iphost
         
     role = 1    # role -> serveur(1) ou client(2) pour gerer le tour par tour
-
+    """
     fenetre_attente = Tk()
     fenetre_attente.title("Attente de joueur")
 
@@ -154,14 +154,12 @@ def Serveur(): #appeler par valider
 
     fenetre_attente.mainloop()
     """
-    try:    
-        print("Tentative de création d'un socket à l'adresse "+ str(HOST.get()) +" sur le port 50000...")
-    except:
-        print("Tentative de création d'un socket à l'adresse "+ str(HOST) +" sur le port 50000...")
+    
+    print("Tentative de création d'un socket à l'adresse "+ str(iphost) +" sur le port 50000...")
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    """
+    
     try :
-        mySocket.bind((str(iphost), int(50000)))
+        mySocket.bind(("localhost", int(50000)))
         print("En attente d'un joueur...")
                 
     except socket.error:

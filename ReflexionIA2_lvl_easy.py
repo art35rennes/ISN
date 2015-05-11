@@ -86,21 +86,29 @@ def Placement_bateau():
     print(BoatsIA)
     print(" ")
 
+def Tir_IA_easy():
+
+    while Toucher < 17:
+        Tir_aleat()
+
+    if Toucher == 17:
+        print("Tout les bateaux ennemies on été coulé")
 
 
 """.....................................................
     TEST 
 """
+print("Pour couler tout les bateaux ennemies taper 1 sinon si vous voulez une IA coups par coups taper 2")
 
+mode = input()
 
 Placement_bateau()
 
-for boucletest in range (0,100):
+if mode == 1:
+    Tir_IA_easy()
+else:
     Tir_aleat()
 
-    if Toucher == 17:
-        print("Tout les bateaux ennemies on été coulé")
-        break
 
-print(Grille)
+
 print(nbtir) 
