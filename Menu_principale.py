@@ -4,69 +4,6 @@ from socket import gethostbyname_ex, gethostname
 
 global role, iphost
 
-"""
-"""
-def Valider(): #appeler par la fonction IP_host
-    global fenetre_hebergeur
-    """
-    try:
-        print(HOST.get())
-    except:
-        print(HOST)
-
-    try:
-        fenetre_hebergeur.destroy()
-    except:
-        pass
-    """
-    Serveur()
-
-"""
-"""
-
-
-def IP_host(): #appeler par le bouton heberger
-    
-      
-    global HOST, iphost
-    global fenetre_hebergeur, iphost
-    """
-    HOST = StringVar()
-    fenetre_choix.destroy()
-    
-    # L'ip du serveur pour le socket est directement recuperer sur l'ordinateur
-    
-    try:
-        
-        HOST = [ip for ip in socket.gethostbyname_ex(socket.gethostname())[2] if not ip.startswith("127.")][0]
-        Valider()
-    
-    except:
-        
-        fenetre_hebergeur = Tk()
-        fenetre_hebergeur.title("Bataille Navale IP")
-         
-        HOST = StringVar()
-    
-        # création des widgets d'entrée
-        ip_label = Label(fenetre_hebergeur, text="Entrer votre IP :", font="arial 10 bold")
-        ip_entry = Entry(fenetre_hebergeur, width=14, text = HOST)
-        test_button = Button(fenetre_hebergeur, text="Valider", font="arial 10 bold", command=Valider)
-
-        # placement des widgets d'entrée dans fenetre
-        ip_label.pack(side=LEFT,padx=8,pady=8)
-        ip_entry.pack(side=LEFT,padx=8,pady=8)
-        test_button.pack(side=LEFT,padx=30,pady=8)
-
-        fenetre_hebergeur.mainloop
-
-        HOST = iphost
-        print(HOST)
-    """
-    Valider()
-
-"""
-"""
 
 def Rejoindre(): #appeler par le bouton rejoindre
 
@@ -103,10 +40,8 @@ def Rejoindre(): #appeler par le bouton rejoindre
     test_button.pack(side=LEFT,padx=8,pady=8)
 
     fenetre_connection.mainloop()
-    
 
-"""
-"""
+    
 
 def connection(): #appeler par la fonction rejoindre quand on clic sur connection
 
@@ -133,8 +68,6 @@ def connection(): #appeler par la fonction rejoindre quand on clic sur connectio
     print("Vous etes connecte au serveur"+ str(iphost))
     fenetre_connection.destroy()
 
-"""
-"""
 
 def Serveur(): #appeler par valider
 
@@ -166,10 +99,25 @@ def Serveur(): #appeler par valider
     mySocket.listen(40)
     connexion, adresse = mySocket.accept()
 
-   
-"""
-Fin definition des fonctions
-"""
+def Choix_IA():
+
+    global fenetre_choix
+
+    fenetre_choix.destroy()
+
+    fenetre_IA = Tk()
+    fenetre_IA.title("Choisissez un niveau d'IA")
+
+    button_easy = Button(fenetre_IA, text = "Difficulté: Facile", font="arial 12 bold")
+    button_medium = Button(fenetre_IA, text = "Difficulté: Moyenne", font="arial 12 bold")
+    button_hard = Button(fenetre_IA, text = "Difficulté: Difficile", font="arial 12 bold")
+
+    button_easy.pack(side=LEFT,padx=50,pady=10)
+    button_medium.pack(side=LEFT,padx=50,pady=10)
+    button_hard.pack(side=LEFT,padx=50,pady=10)
+
+
+    
 iphost = str(gethostbyname_ex(gethostname())[2])
 iphost = str(iphost.split("'")[1])
 #print(str(iphost.split("'")[1]))
@@ -180,9 +128,9 @@ print(iphost)
 fenetre_choix = Tk()
 fenetre_choix.title("Bataille Navale Connection  IP: " + iphost)
 
-button_heber = Button(fenetre_choix, text = "Heberger une partie",font="arial 12 bold",command=IP_host )
+button_heber = Button(fenetre_choix, text = "Heberger une partie",font="arial 12 bold",command=Serveur )
 button_rej = Button(fenetre_choix, text = "Rejoindre une partie",font="arial 12 bold", command=Rejoindre)
-button_ia = Button(fenetre_choix, text = "Jouer contre l'IA",font="arial 12 bold")
+button_ia = Button(fenetre_choix, text = "Jouer contre l'IA",font="arial 12 bold",command=Choix_IA)
 taille_x_l = Label(fenetre_choix)
 taille_y_b = Label(fenetre_choix)
 info_ip = Label(fenetre_choix, text = "Votre IP: " + iphost)
@@ -196,15 +144,3 @@ info_ip.pack(side=BOTTOM)
 
 
 fenetre_choix.mainloop()
-
-"""
-#Programme Bataille navale
-"""
-
-"""
-#Jeu Partie Serveur
-"""
-
-"""
-#Jeu Partie Client
-"""
