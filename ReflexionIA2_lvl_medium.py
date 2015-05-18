@@ -1,43 +1,49 @@
 import random
 
-Grille = []
-for x in range (1,11):
-    for y in range (1,11):
-        CoordGrille = str(x) + " " + str(y)
-        #print(CoordTirIA)
-        Grille.append(CoordGrille)
-#print(Grille)
-Boat_found = "non"
-Boat_direction = "non"
-Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
-Toucher = 0
-nbtir = 0
-Grille_Tir = []
+def Initialisation_medium():
 
-for coord in Boats_joueur.values():
-    print(coord)
-    for rang in range (0,len(coord)):
-        Grille_Tir.append(coord[rang])
-        Grille.remove(coord[rang])
+    global Grille, CoordGrille, Boat_found, Boats_joueur, Toucher, nbtir, Grille_Tir, nbcase, azerty
+    
+    Placement_bateau()
 
-print(" ")
-print(Grille_Tir)
-print(" ")
+    Grille = []
+    for x in range (1,11):
+        for y in range (1,11):
+            CoordGrille = str(x) + " " + str(y)
+            #print(CoordTirIA)
+            Grille.append(CoordGrille)
+    #print(Grille)
+    Boat_found = "non"
+    Boat_direction = "non"
+    Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
+    Toucher = 0
+    nbtir = 0
+    Grille_Tir = []
 
-for nbcase in range (0,random.randint(25,40)):
-    azerty = random.choice(Grille)
-    Grille.remove(azerty)
-    Grille_Tir.append(azerty)
+    for coord in Boats_joueur.values():
+        print(coord)
+        for rang in range (0,len(coord)):
+            Grille_Tir.append(coord[rang])
+            Grille.remove(coord[rang])
 
-print(" ")
-print(Grille_Tir)
-print(" ")
-print("nb de coordonnée "+str(len(Grille_Tir)))
-print(" ")
+    print(" ")
+    print(Grille_Tir)
+    print(" ")
+
+    for nbcase in range (0,random.randint(25,40)):
+        azerty = random.choice(Grille)
+        Grille.remove(azerty)
+        Grille_Tir.append(azerty)
+
+    print(" ")
+    print(Grille_Tir)
+    print(" ")
+    print("nb de coordonnée "+str(len(Grille_Tir)))
+    print(" ")
 
 
 
-def Tir_aleat():
+def Tir_aleat_medium():
 
     global Grille_Tir, Coord_Tir, nbtir
 
@@ -109,10 +115,10 @@ def Placement_bateau():
     print(BoatsIA)
     print(" ")
 
-def Tir_IA_easy():
+def Tir_IA_medium():
 
     while Toucher < 17:
-        Tir_aleat()
+        Tir_aleat_medium()
 
     if Toucher == 17:
         print("Tout les bateaux ennemies on été coulé")
@@ -121,19 +127,10 @@ def Tir_IA_easy():
 """.....................................................
     TEST 
 """
-print("Pour couler tout les bateaux ennemies taper 1 sinon si vous voulez une IA coups par coups taper 2")
 
-#mode = input()
+Initialisation_medium()
 
-Placement_bateau()
-
-Tir_IA_easy()
-"""
-if mode == 1:
-    Tir_IA_easy()
-else:
-    Tir_aleat()
-"""
+Tir_IA_medium()
 
 print(" ")
 print(nbtir)

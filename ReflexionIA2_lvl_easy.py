@@ -1,20 +1,25 @@
 import random
 
-Grille = []
-for x in range (1,11):
-    for y in range (1,11):
-        CoordGrille = str(x) + " " + str(y)
-        #print(CoordTirIA)
-        Grille.append(CoordGrille)
-print(Grille)
-Boat_found = "non"
-Boat_direction = "non"
-Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
-Toucher = 0
-nbtir = 0
+def Initialisation_easy():
+
+    global Grille, CoordGrille, Boat_found, Boat_direction, Boats_joueur, Toucher, nbtir
+
+    Grille = []
+    for x in range (1,11):
+        for y in range (1,11):
+            CoordGrille = str(x) + " " + str(y)
+            #print(CoordTirIA)
+            Grille.append(CoordGrille)
+    print(Grille)
+    Boat_found = "non"
+    Boat_direction = "non"
+    Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
+    Toucher = 0
+    nbtir = 0
+    Placement_bateau()
 
 
-def Tir_aleat():
+def Tir_aleat_easy():
 
     global Grille, Coord_Tir, nbtir
 
@@ -89,7 +94,7 @@ def Placement_bateau():
 def Tir_IA_easy():
 
     while Toucher < 17:
-        Tir_aleat()
+        Tir_aleat_easy()
 
     if Toucher == 17:
         print("Tout les bateaux ennemies on été coulé")
@@ -98,17 +103,9 @@ def Tir_IA_easy():
 """.....................................................
     TEST 
 """
-print("Pour couler tout les bateaux ennemies taper 1 sinon si vous voulez une IA coups par coups taper 2")
 
-mode = input()
+Initialisation_easy()
 
-Placement_bateau()
-
-if mode == 1:
-    Tir_IA_easy()
-else:
-    Tir_aleat()
-
-
+Tir_IA_easy()
 
 print(nbtir) 
