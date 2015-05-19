@@ -101,6 +101,7 @@ def Verif_joueur_toucher():
     if [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]] != []:
 
         print("                                         **Bateau toucher"+ " " + Coord_Tir)
+        
 
         Toucher = Toucher + 1
         toucher = 1
@@ -114,7 +115,7 @@ def Verif_joueur_toucher():
 
         print("                       ^^ "+str(bateautouche))
 
-        print("on est la")
+        #print("on est la")
 
         if Boats_joueur[bateautouche[0]] == []:
             print("                                         bateau coulé")
@@ -125,7 +126,7 @@ def Verif_joueur_toucher():
     else:
         print("                                         dans l'eau")
         toucher = "non"
-        print("on est la3")
+        #print("on est la3")
 
 
 
