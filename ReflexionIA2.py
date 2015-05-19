@@ -11,6 +11,11 @@ Boat_found = 0
 Boat_direction = 0
 Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
 Toucher = 0
+Croix = []
+#print(len(Croix))
+a_remove = []
+Couler = 0
+Grande_Croix = []
 
 
 
@@ -21,19 +26,109 @@ def Reset():
 
 def Tir_aleat():
 
-    global Grille, Coord_Tir, Premiere_touche
+    global Grille, Coord_Tir, Premiere_touche, Croix
 
     Coord_Tir = random.choice(Grille)
     print("Tir aleat " + str(Coord_Tir))
     Grille.remove(Coord_Tir)
     Premiere_touche = Coord_Tir
+    Croix = []
+
+
+    
+def Croix_de_tir():
+
+    global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche, Croix, a_remove
+
+
+    if len(Croix) == 0 :
+
+        a_remove = []
+
+        x = Premiere_touche.split(" ",1)[0]
+        y = Premiere_touche.split(" ",1)[1]
+
+        xbis = int(x) + 1    
+        Croix.append(str(xbis) + " " + str(y))
+
+        xbis = int(x) - 1
+        Croix.append(str(xbis) + " " + str(y))
+
+        ybis = int(y) + 1
+        Croix.append(str(x) + " " + str(ybis))
+
+        ybis = int(y) - 1
+        Croix.append(str(x) + " " + str(ybis))
+
+        for nbcase in range(0,len(Croix)):
+
+            try:
+                Grille.remove(Croix[nbcase])
+            except:
+                a_remove.append(Croix[nbcase])
+
+        #print(a_remove)
+
+        if len(a_remove) > 0:
+            for nbcase in range (0,(len(a_remove)-1)):
+
+                Croix.remove(a_remove[nbcase])
+
+        print(Croix)                 
     
 
+
+def Generation_grande_croix():
+
+    global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche, Croix, Deuxieme_Touche, Grande_Croix
+
+    x1 = Premiere_touche.split(" ",1)[0]
+    y1 = Premiere_touche.split(" ",1)[1]
+
+    x2 = Deuxieme_Touche.split(" ",1)[0]
+    y2 = Deuxieme_Touche.split(" ",1)[1]
+
+    x1=int(x1); y1=int(y1); x2=int(x2); y2=int(y2)
+
+    print(len(Grande_Croix))
+    
+    if len(Grande_Croix) == 0:
+        if x1 - x2 == 0:
+            print("je suis passer la ")
+            for i in range (-4,4):
+                if i != 0:
+                    print("                        par la i=" + str(i))
+                    tempe = str(x) + " " + str(y+i)
+                    print(tempe)
+                    Grande_Croix.append(tempe)
+                    try:
+                        Grille.remove(tempe)
+                    except:
+                        Grande_Croix.remove(tempe)           
+        else:
+            print("je suis passer la aussi ")
+            for i in range (-4,4):
+                if i != 0:
+                    print("                        par la aussi i=" + str(i))
+                    tempe = str(x+1) + " " + str(y)
+                    print(tempe)
+                    Grande_Croix.append(tempe)
+                    try:
+                        Grille.remove(tempe)
+                    except:
+                        Grande_Croix.remove(tempe)
+    print(Grande_Croix)
+
+                                  
+
+        
+    
+    
 
 
 def Tir_IA():
 
-    global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche
+    global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche, Croix, Deuxieme_Touche, Couler, Grande_Croix
 
     Liste_Direction = ["X1", "X-1", "Y1", "Y-1"]
 
@@ -43,78 +138,48 @@ def Tir_IA():
         Verif_joueur_toucher()
 
     elif Boat_direction == 0:
+        
+        Croix_de_tir()
+        Coord_Tir = random.choice(Croix)
+        Deuxieme_Touche = Coord_Tir
+        print(Coord_Tir)
+        Croix.remove(Coord_Tir)
+        print(Croix)
+        Verif_joueur_toucher()
 
-        Direction = random.choice(Liste_Direction)
-        print("Direction " + Direction)
-        Liste_Direction.remove(Direction)
+    elif Couler == 0:
 
-        if Direction == "X1":
+        if len(Croix) > 0:
+            for nbcase in range (0,(len(Croix)-1)):
+                Grille.append(Croix[nbcase])
 
-            x = Coord_Tir_1.split(" ")[0]
-            print(x)
-            print("")
-            x = x + 1
-            print(x)
-            Coord_Tir = str(x) + " " + str(y)
+                        
 
-        elif Direction == "X-1":
-
-            x = Coord_Tir_1.split(" ")[0]
-            print(x)
-            print("")
-            int(x)
-            x = x - 1
-            print(x)
-            Coord_Tir = str(x) + " " + str(y)
-
-        elif Direction == "Y1":
-
-            y = Coord_Tir_1.split(" ")[1]
-            print(y)
-            print("")
-            int(y)
-            y = y + 1
-            print(y)
-            Coord_Tir = str(x) + " " + str(y)
-
-        elif Direction == "Y-1":
-
-            y = Coord_Tir_1.split(" ")[1]
-            print(y)
-            print("")
-            int(y)
-            y = y - 1
-            print(y)
-            Coord_Tir = str(x) + " " + str(y)
-
-    elif Couler == 1:
-
-        if Direction == "X1" or Direction == "X-1":
-            print("ici")
+        Generation_grande_croix()
+        
+        print("fait")
+        
         
 
 
 def Verif_joueur_toucher():
 
-    global Grille, Boat_found, Boat_direction, Boats_joueur, Coord_Tir, Toucher, toucher, bateautouche, Premiere_touche
+    global Grille, Boat_found, Boat_direction, Boats_joueur, Coord_Tir, Toucher, toucher, bateautouche, Premiere_touche, Couler
     
     if [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]] != []:
-
-        print("                                         **Bateau toucher"+ " " + Coord_Tir)
         
-
+        print("                                         **Bateau toucher"+ " " + Coord_Tir)
         Toucher = Toucher + 1
         toucher = 1
         
         if Boat_found == 1:
             Boat_direction = 1
-
-        Boat_found == 1
-            
+        
+        Boat_found = 1
+                   
         bateautouche = [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]]
 
         print("                       ^^ "+str(bateautouche))
-
         #print("on est la")
 
         if Boats_joueur[bateautouche[0]] == []:
@@ -182,6 +247,66 @@ def Placement_bateau():
 Placement_bateau()
 
 for boucletest in range (0,15):
-    Tir_IA()
+    if Toucher < 17:
+        #print(boucletest)
+        Tir_IA()
+    else:
+        print("Tout le navire on ete couler")
+        break
 
 #print(Grille)
+
+
+
+
+
+"""
+
+----------------Code useless-----------------------------
+
+
+Direction = random.choice(Liste_Direction)
+        print("Direction " + Direction)
+        Liste_Direction.remove(Direction)
+
+        if Direction == "X1":
+
+            x = Coord_Tir_1.split(" ")[0]
+            print(x)
+            print("")
+            x = x + 1
+            print(x)
+            Coord_Tir = str(x) + " " + str(y)
+
+        elif Direction == "X-1":
+
+            x = Coord_Tir_1.split(" ")[0]
+            print(x)
+            print("")
+            int(x)
+            x = x - 1
+            print(x)
+            Coord_Tir = str(x) + " " + str(y)
+
+        elif Direction == "Y1":
+
+            y = Coord_Tir_1.split(" ")[1]
+            print(y)
+            print("")
+            int(y)
+            y = y + 1
+            print(y)
+            Coord_Tir = str(x) + " " + str(y)
+
+        elif Direction == "Y-1":
+
+            y = Coord_Tir_1.split(" ")[1]
+            print(y)
+            print("")
+            int(y)
+            y = y - 1
+            print(y)
+            Coord_Tir = str(x) + " " + str(y)
+
+
+"""
