@@ -10,7 +10,7 @@ def Initialisation_IA_hard():
             CoordGrille = str(x) + " " + str(y)
             #                                                                                                               print(CoordTirIA)
             Grille.append(CoordGrille)
-    #print(Grille)
+    print(Grille)
     Boat_found = 0
     Boat_direction = 0
     Boats_joueur = {'Contre-torpilleur': ['4 7', '3 7', '2 7'], 'Croiseur': ['9 6', '9 7', '9 8', '9 9'], 'Torpilleur': ['10 2', '9 2'], 'Porte-avion': ['6 3', '6 4', '6 5', '6 6', '6 7'], 'Sous-marin': ['2 1', '3 1', '4 1']}
@@ -41,7 +41,7 @@ def Reset_IA_hard():
     Grande_Croix = []
     Boat_found = 0
     Boat_direction = 0
-    #print("                                                                               RESET")
+    print("                                                                               RESET")
 
 
 def Tir_aleat():
@@ -49,7 +49,7 @@ def Tir_aleat():
     global Grille, Coord_Tir, Premiere_touche, Croix
 
     Coord_Tir = random.choice(Grille)
-    #print("Tir aleat " + str(Coord_Tir))
+    print("Tir aleat " + str(Coord_Tir))
     Grille.remove(Coord_Tir)
     Premiere_touche = Coord_Tir
     Croix = []
@@ -147,7 +147,7 @@ def Generation_grande_croix():
                         Grille.remove(tempe)
                     except:
                         Grande_Croix.remove(tempe)
-    #print("                                    Grande Croix = " + str(Grande_Croix))
+    #                                                                                                                       print("                                    Grande Croix = " + str(Grande_Croix))
 
                                   
 
@@ -171,7 +171,7 @@ def Tir_IA():
         Croix_de_tir()
         Coord_Tir = random.choice(Croix)
         Deuxieme_Touche = Coord_Tir
-        #print("Tir en " + str(Coord_Tir) + "^")
+        print("Tir en " + str(Coord_Tir) + "^")
         Croix.remove(Coord_Tir)
         #                                                                                                                   print(Croix)
         Verif_joueur_toucher()
@@ -182,12 +182,12 @@ def Tir_IA():
         Generation_grande_croix()
         Coord_Tir = random.choice(Grande_Croix)
         Grande_Croix.remove(Coord_Tir)
-        #print("Tir en " + str(Coord_Tir))
+        print("Tir en " + str(Coord_Tir))
         Verif_joueur_toucher()
         
         
         #                                                                                                                   print("fait //")
-        #print(" ")
+        print(" ")
         
         
 
@@ -198,7 +198,7 @@ def Verif_joueur_toucher():
     
     if [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]] != []:
         
-        #print("                                         **Bateau toucher"+ " " + Coord_Tir)
+        print("                                         **Bateau toucher"+ " " + Coord_Tir)
         Toucher = Toucher + 1
         toucher = 1
         
@@ -209,17 +209,17 @@ def Verif_joueur_toucher():
                    
         bateautouche = [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]]
         Boats_joueur[bateautouche[0]].remove(Coord_Tir)
-        #print("                       ^^ "+str(bateautouche))
+        print("                       ^^ "+str(bateautouche))
         #                                                                                                                   print("on est la")
 
         if Boats_joueur[bateautouche[0]] == []:
-            #print("                                         bateau coulé")
-            #print("                       // "+str(bateautouche)+" coulé")
+            print("                                         bateau coulé")
+            print("                       // "+str(bateautouche)+" coulé")
             Boats_joueur.pop(bateautouche[0])
             Reset_IA_hard()
             #                                                                                                               print("on est la2")
     else:
-        #print("                                         dans l'eau")
+        print("                                         dans l'eau")
         toucher = "non"
         #                                                                                                                   print("on est la3")
 
@@ -232,9 +232,9 @@ def Placement_bateau():
     composition = 0
 
     composition = random.randint(0,10)
-    #print(" ")
-    #print("composition " + str(composition))
-    #print(" ")
+    print(" ")
+    print("composition " + str(composition))
+    print(" ")
 
     if composition == 0:
         BoatsIA = {'Porte-avion': ['2 2', '2 3', '2 4', '2 5', '2 6'], 'Croiseur': ['3 8', '4 8', '5 8', '6 8'], 'Contre-torpilleur': ['4 5', '4 4', '4 3'], 'Torpilleur': ['8 8', '8 9'], 'Sous-marin': ['7 5', '8 5', '9 5']}
@@ -257,8 +257,8 @@ def Placement_bateau():
     else:
         Placement_bateau()
 
-    #print(BoatsIA)
-    #print(" ")
+    print(BoatsIA)
+    print(" ")
 
 """.....................................................
     TEST 
@@ -272,9 +272,9 @@ def TEST():
     
     while Toucher < 17 or len(Boats_joueur) != 0:
         n = n + 1
-        #print("                                                                    " + str(n))
+        print("                                                                    " + str(n))
         Tir_IA() 
-    #print("Tout le navire on ete couler")
+    print("Tout le navire on ete couler")
                
 """
 moyenne = []
@@ -290,14 +290,6 @@ print(m/len(moyenne))
 """
 
 TEST()
-
-
-
-
-
-
-
-
 
 """
 

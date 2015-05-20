@@ -276,7 +276,7 @@ def TEST():
         Tir_IA() 
     #print("Tout le navire on ete couler")
                
-"""
+
 moyenne = []
 m = 0
 
@@ -287,9 +287,7 @@ for couille in range (0,100):
     moyenne.append(n)
 print(moyenne)
 print(m/len(moyenne))
-"""
 
-TEST()
 
 
 
