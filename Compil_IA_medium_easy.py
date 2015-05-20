@@ -58,17 +58,17 @@ def Verif_joueur_toucher():
     if [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]] != []:
 
         print("                                         **Bateau toucher"+ " " + Coord_Tir)
-
+        
         Toucher = Toucher + 1
         toucher = "non"
         bateautouche = [key for key in Boats_joueur if Coord_Tir in Boats_joueur[key]]
-
+        Boats_joueur[bateautouche[0]].remove(Coord_Tir)
         print("                       ^^ "+str(bateautouche))
 
         if Boats_joueur[bateautouche[0]] == []:
             print("                                         bateau coulé")
             print("                       // "+str(bateautouche))
-            boats.pop(bateautouche[0])
+            Boats_joueur.pop(bateautouche[0])
             Couler = "oui"
     else:
         print("                                         dans l'eau")
@@ -158,7 +158,7 @@ def Initialisation_easy():
 TEST
 """
 
-"""
+
 Initialisation_medium()
 
 Tir_IA_medium()
@@ -169,7 +169,7 @@ print(" ")
 
 print(" ")
 print(Grille_Tir)
-"""
+print(Boats_joueur)
 
 """
 Initialisation_easy()
