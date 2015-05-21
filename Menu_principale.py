@@ -116,12 +116,44 @@ def Choix_IA():
     button_medium.pack(side=LEFT,padx=50,pady=10)
     button_hard.pack(side=LEFT,padx=50,pady=10)
 
+def Fenetre_ip(): #appeler par le bouton rejoindre
+
+    role = 2
+    
+    fenetre_ip = Tk()
+    fenetre_ip.title("Bataille Navale IP Host")
+    
+    global iphost
+       
+    iphost = StringVar()
+        
+    iphost.set("192.168.")
+    print(iphost.get())
+
+    # création des widgets d'entrée
+    ip_label = Label(fenetre_ip, text="IP :", font="arial 10 bold")
+    ip_entry = Entry(fenetre_ip, width=14, text = iphost)
+    test_button = Button(fenetre_ip, text="Valider", font="arial 10 bold", command=fenetre_ip.destroy)
+
+    # placement des widgets d'entrée dans fenetre
+    ip_label.pack(side=LEFT,padx=8,pady=8)
+    ip_entry.pack(side=LEFT,padx=16,pady=8)
+    test_button.pack(side=LEFT,padx=8,pady=8)
+
+    fenetre_ip.mainloop()
+    print(iphost.get)
 
     
 iphost = str(gethostbyname_ex(gethostname())[2])
 iphost = str(iphost.split("'")[1])
 #print(str(iphost.split("'")[1]))
 print(iphost)
+iphost="197.168.1.33"
+
+if iphost.split(".",5)[0] != "192":
+    
+    Fenetre_ip()
+    iphost = str(iphost)
 
 #Debut du programme
 
