@@ -1,11 +1,11 @@
 import random
 
-def Initialisation_IA_hard():
+def Initialisation_IA_hard(): #Definie toute les variable qui seront utilisee plus tard
 
     global Grille, CoordGrille, Boat_found, Boat_direction, Boats_joueur, Toucher,Croix, a_remove, Grande_Croix, Couler
 
     Grille = []
-    for x in range (1,11):
+    for x in range (1,11): #Genere toute les coordonnees de la grille
         for y in range (1,11):
             CoordGrille = str(x) + " " + str(y)
             #                                                                                                               print(CoordTirIA)
@@ -25,11 +25,11 @@ def Initialisation_IA_hard():
    
 
 
-def Reset_IA_hard():
+def Reset_IA_hard(): #Permet a l'IA de rapartire en tir aleatoire suite a une erreur ou un bateau ennemie couler
 
     global Boat_found, Boat_direction, touche, Couler,Croix, Grande_Croix, a_remove
 
-    if len(Grande_Croix) > 0:
+    if len(Grande_Croix) > 0: #Les coordonnees n'ayant pas ete tirer dans la derniere phase de tir son reinserer dans la grille afin de pouvoir les reutiliser
             for nbcase in range (0,(len(Grande_Croix))):
                 Grille.append(Grande_Croix[nbcase])
 
@@ -44,7 +44,7 @@ def Reset_IA_hard():
     print("                                                                               RESET")
 
 
-def Tir_aleat():
+def Tir_aleat(): #Choisie un lot de coordonnée parmit toute celle disponible dans Grille
 
     global Grille, Coord_Tir, Premiere_touche, Croix
 
@@ -56,7 +56,7 @@ def Tir_aleat():
 
 
     
-def Croix_de_tir():
+def Croix_de_tir(): # La croix de tir correspond aux 4 cases qui entourent Premiere_touche 
 
     global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche, Croix, a_remove
 
@@ -80,12 +80,12 @@ def Croix_de_tir():
         ybis = int(y) - 1
         Croix.append(str(x) + " " + str(ybis))
 
-        for nbcase in range(0,len(Croix)):
+        for nbcase in range(0,len(Croix)): #On verifie si les coordonnees genere sont encore disponible
 
             try:
                 Grille.remove(Croix[nbcase])
             except:
-                a_remove.append(Croix[nbcase])
+                a_remove.append(Croix[nbcase]) #On stocke les coordonnes qui se trouve dans Croix mais pas dans Grille (elles ont deja ete tirer)
 
         #                                                                                                                   print(a_remove)
         if len(a_remove) > 0:
@@ -97,11 +97,13 @@ def Croix_de_tir():
     
 
 
-def Generation_grande_croix():
+def Generation_grande_croix(): #Il ne s'agit pas réellement d'une croix mais d'une ligne, on utilise toujours en case de reference Premiere_touche
+                               #La ligne est horizontale ou verticale cela depend de Deuxieme_touche. Grande_Croix contient 7cases au maximum, case de reference +4 et -4
+                               #exemple: Premiere_touche: "4 4" Deuxieme_touche: "4 5", le bateau est donc horizontale. Grande_Croix : "4 1", "4 2", "4 3", "4 6", "4 7", "4 8"
 
     global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche, Croix, Deuxieme_Touche, Grande_Croix
 
-    if len(Croix) > 0:
+    if len(Croix) > 0: #On reintegre les coordonnees restante dans Croix dans la Grille afin de pouvoir les reutiliser
             for nbcase in range (0,(len(Croix))):
                 Grille.append(Croix[nbcase])
                 
@@ -118,11 +120,11 @@ def Generation_grande_croix():
 
     #                                                                                                                       print("len grande croix = " + str(len(Grande_Croix)))
     
-    if len(Grande_Croix) == 0:
+    if len(Grande_Croix) == 0: #On ne regenre une liste que si elle vide ce qui n'arrive que suite a un reset
         if x1 - x2 == 0:
            #                                                                                                                print("je suis passer la ")
             for i in range (-4,5):
-                if i != 110:
+                if i != 110: #110 car avec 0 une erreur ce produisait, ce if est donc surement inutile
                     #                                                                                                       print("                        par la i=" + str(i))
                     y1bis  = y1+i
                     #                                                                                                       print("y1bis = " + str(y1))
@@ -161,12 +163,12 @@ def Tir_IA():
     global Grille, Boat_found, Boat_direction, Coord_Tir, Premiere_touche, Croix, Deuxieme_Touche, Couler, Grande_Croix
 
 
-    if Boat_found == 0:
+    if Boat_found == 0: #Si aucun bateau n'a ete trouver
 
         Tir_aleat()
         Verif_joueur_toucher()
 
-    elif Boat_direction == 0:
+    elif Boat_direction == 0: #Si un bateau a ete trouver mais que l'on ne connait sa direction
         
         Croix_de_tir()
         Coord_Tir = random.choice(Croix)
@@ -176,7 +178,7 @@ def Tir_IA():
         #                                                                                                                   print(Croix)
         Verif_joueur_toucher()
 
-    else:
+    else: #On termine de couler le navire ennemie
 
         #                                                                                                                   print("len croix = " + str(len(Croix)))
         Generation_grande_croix()
@@ -192,7 +194,11 @@ def Tir_IA():
         
 
 
-def Verif_joueur_toucher():
+def Verif_joueur_toucher(): #On verifie si on a toucher un navire ennemie et si il est couler
+
+    """
+    Note a Leo: C'est surement dans cette fonction qu'il gerer la partie graphique de l'IA
+    """
 
     global Grille, Boat_found, Boat_direction, Boats_joueur, Coord_Tir, Toucher, toucher, bateautouche, Premiere_touche, Couler
     
@@ -216,7 +222,7 @@ def Verif_joueur_toucher():
             print("                                         bateau coulé")
             print("                       // "+str(bateautouche)+" coulé")
             Boats_joueur.pop(bateautouche[0])
-            Reset_IA_hard()
+            Reset_IA_hard() #Si couler alors reset
             #                                                                                                               print("on est la2")
     else:
         print("                                         dans l'eau")
@@ -231,7 +237,7 @@ def Placement_bateau():
     
     composition = 0
 
-    composition = random.randint(0,10)
+    composition = random.randint(0,10) #on choisie un composition aleatoirement en theorie on peut en rajouter autant que l'on veux
     print(" ")
     print("composition " + str(composition))
     print(" ")
