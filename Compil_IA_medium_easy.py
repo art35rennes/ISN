@@ -1,6 +1,6 @@
 import random
 
-def Tir_IA_medium():
+def Tir_IA_medium(): # Cette fonction permet de tester l'ia(demo) mais n'a aucun interet en jeu
 
     while Toucher < 17:
         Tir_aleat_medium()
@@ -8,7 +8,7 @@ def Tir_IA_medium():
     if Toucher == 17:
         print("Tout les bateaux ennemies on été coulé")
 
-def Tir_IA_easy():
+def Tir_IA_easy(): # Cette fonction permet de tester l'ia(demo) mais n'a aucun interet en jeu
 
     while Toucher < 17:
         Tir_aleat_easy()
@@ -51,7 +51,7 @@ def Placement_bateau():
     print(BoatsIA)
     print(" ")
 
-def Verif_joueur_toucher():
+def Verif_joueur_toucher_easy_medium(): #On verifie si les coordonnee genere permettent de toucher un navire ainsi que si ce dernier est couler
 
     global Grille, Boat_found, Boat_direction, Boats_joueur, Coord_Tir, Toucher, toucher, bateautouche
     
@@ -74,24 +74,24 @@ def Verif_joueur_toucher():
         print("                                         dans l'eau")
 
 
-def Tir_aleat_easy():
+def Tir_aleat_easy(): #On choisie aleatoirement un case dans toute la grille
 
     global Grille, Coord_Tir, nbtir
 
     Coord_Tir = random.choice(Grille)
     print("Tir aleat " + str(Coord_Tir))
     Grille.remove(Coord_Tir)
-    Verif_joueur_toucher()
+    Verif_joueur_toucher_easy_medium()
     nbtir = nbtir + 1
 
-def Tir_aleat_medium():
+def Tir_aleat_medium(): #On choisie une case parmit les navires ennemie et quelque case d'eau
 
     global Grille_Tir, Coord_Tir, nbtir
 
     Coord_Tir = random.choice(Grille_Tir)
     print("Tir aleat " + str(Coord_Tir))
     Grille_Tir.remove(Coord_Tir)
-    Verif_joueur_toucher()
+    Verif_joueur_toucher_easy_medium()
     nbtir = nbtir + 1
 
 def Initialisation_medium():
@@ -114,7 +114,7 @@ def Initialisation_medium():
     nbtir = 0
     Grille_Tir = []
 
-    for coord in Boats_joueur.values():
+    for coord in Boats_joueur.values(): #On ajoute les coordonnees de navire ennemie dans la liste des possibilite de tir
         print(coord)
         for rang in range (0,len(coord)):
             Grille_Tir.append(coord[rang])
@@ -124,7 +124,7 @@ def Initialisation_medium():
     print(Grille_Tir)
     print(" ")
 
-    for nbcase in range (0,random.randint(25,40)):
+    for nbcase in range (0,random.randint(25,40)): #On ajoute un nombre aleatoire de case d'eau (entre 25 et 40) dans la liste des possibilite de tir
         azerty = random.choice(Grille)
         Grille.remove(azerty)
         Grille_Tir.append(azerty)
@@ -140,7 +140,7 @@ def Initialisation_easy():
     global Grille, CoordGrille, Boat_found, Boat_direction, Boats_joueur, Toucher, nbtir
 
     Grille = []
-    for x in range (1,11):
+    for x in range (1,11): #On genere toute les coordonnees de la grille
         for y in range (1,11):
             CoordGrille = str(x) + " " + str(y)
             #print(CoordTirIA)
@@ -158,7 +158,7 @@ def Initialisation_easy():
 TEST
 """
 
-
+"""
 Initialisation_medium()
 
 Tir_IA_medium()
@@ -170,6 +170,7 @@ print(" ")
 print(" ")
 print(Grille_Tir)
 print(Boats_joueur)
+"""
 
 """
 Initialisation_easy()
