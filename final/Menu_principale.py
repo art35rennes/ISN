@@ -107,10 +107,11 @@ def Choix_IA():
 
     fenetre_IA = Tk()
     fenetre_IA.title("Choisissez un niveau d'IA")
+    fenetre_IA.configure(bg = "#00B3D7")
 
-    button_easy = Button(fenetre_IA, text = "Difficulté: Facile", font="arial 12 bold")
-    button_medium = Button(fenetre_IA, text = "Difficulté: Moyenne", font="arial 12 bold")
-    button_hard = Button(fenetre_IA, text = "Difficulté: Difficile", font="arial 12 bold")
+    button_easy = Button(fenetre_IA, text = "Difficulté: Facile", font="arial 12 bold", relief=FLAT, bg = "white")
+    button_medium = Button(fenetre_IA, text = "Difficulté: Moyenne", font="arial 12 bold", relief=FLAT, bg = "white")
+    button_hard = Button(fenetre_IA, text = "Difficulté: Difficile", font="arial 12 bold", relief=FLAT, bg = "white")
 
     button_easy.pack(side=LEFT,padx=50,pady=10)
     button_medium.pack(side=LEFT,padx=50,pady=10)
@@ -148,7 +149,7 @@ iphost = str(gethostbyname_ex(gethostname())[2])
 iphost = str(iphost.split("'")[1])
 #print(str(iphost.split("'")[1]))
 print(iphost)
-iphost="197.168.1.33"
+
 
 if iphost.split(".",5)[0] != "192":
     
@@ -159,13 +160,14 @@ if iphost.split(".",5)[0] != "192":
 
 fenetre_choix = Tk()
 fenetre_choix.title("Bataille Navale Connection  IP: " + iphost)
+fenetre_choix.configure(bg = "#00B3D7")
 
-button_heber = Button(fenetre_choix, text = "Heberger une partie",font="arial 12 bold",command=Serveur )
-button_rej = Button(fenetre_choix, text = "Rejoindre une partie",font="arial 12 bold", command=Rejoindre)
-button_ia = Button(fenetre_choix, text = "Jouer contre l'IA",font="arial 12 bold",command=Choix_IA)
-taille_x_l = Label(fenetre_choix)
-taille_y_b = Label(fenetre_choix)
-info_ip = Label(fenetre_choix, text = "Votre IP: " + iphost)
+button_heber = Button(fenetre_choix, text = "Heberger une partie",font="arial 12 bold",command=Serveur, bg = "white", relief=FLAT)
+button_rej = Button(fenetre_choix, text = "Rejoindre une partie",font="arial 12 bold", command=Rejoindre, bg = "white", relief=FLAT)
+button_ia = Button(fenetre_choix, text = "Jouer contre l'IA",font="arial 12 bold",command=Choix_IA, bg = "white", relief=FLAT)
+taille_x_l = Label(fenetre_choix, bg = "#00B3D7")
+taille_y_b = Label(fenetre_choix, bg = "#00B3D7")
+info_ip = Label(fenetre_choix, text = "Votre IP: " + iphost, bg = "#00B3D7")
 
 taille_x_l.pack(side=TOP,padx=380,pady=20)
 button_heber.pack(side=TOP,padx=50,pady=10)
