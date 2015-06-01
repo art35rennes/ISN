@@ -182,10 +182,13 @@ def Tir_IA():
 
         #                                                                                                                   print("len croix = " + str(len(Croix)))
         Generation_grande_croix()
-        Coord_Tir = random.choice(Grande_Croix)
-        Grande_Croix.remove(Coord_Tir)
-        print("Tir en " + str(Coord_Tir))
-        Verif_joueur_toucher()
+        try:
+            Coord_Tir = random.choice(Grande_Croix)
+            Grande_Croix.remove(Coord_Tir)
+            print("Tir en " + str(Coord_Tir))
+            Verif_joueur_toucher()
+        except:
+            Reset_IA_hard()
         
         
         #                                                                                                                   print("fait //")
